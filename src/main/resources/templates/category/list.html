@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category List</title>
+  <th:block th:replace="~{layoutad::link-css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{layoutad::header}"></th:block>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-light">
+        <div class="container-fluid">
+        </div>
+      </nav>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+      <td th:text="${category.getId()}"></td>
+      <td th:text="${category.getName()}"></td>
+      <td colspan="2">
+        <a class="btn btn-primary" sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/categories/edit/{id}(id=${category.getId()})}">Edit</a>
+        <a class="btn btn-danger" sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/categories/delete/{id}(id=${category.getId()})}" onclick="return confirm('Are you sure you want to delete this book?')">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<th:block th:replace="~{layoutad::footer}"></th:block>
+<script th:src="@{/js/dashboard.js}"></script>
+<script th:src="@{/js/simplebar.js}"></script>
+<script th:src="@{/js/apexcharts.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/sidebarmenu.js}"></script>
+<script th:src="@{/js/jquery-min.js}"></script>
+</body>
+</html>

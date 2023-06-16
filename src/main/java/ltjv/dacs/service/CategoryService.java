@@ -20,8 +20,8 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
-    public Optional<Category> getCategoryById(Long id) {
-        return categoryRepository.findById(id);
+    public Category getCategoryById(Long id) {
+        return categoryRepository.findById(id).get();
     }
     public void addCategory(Category category) {
         categoryRepository.save(category);

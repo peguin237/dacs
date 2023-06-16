@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <th:block th:replace="~{layoutad::link-css}"></th:block>
+  <title>Add Category</title>
+</head>
+<body>
+<th:block th:replace="~{layoutad::header}"></th:block>
+<div class="container">
+  <form th:action="@{/categories/add}" th:object="${category}" method="post">
+    <div class="col-6 mb-3">
+      <label class="form-label" for="name">Title:</label><span
+            class="text-danger">*</span>
+      <input class="form-control" required type="text" th:field="*{name}" id="name" placeholder="Enter name" autofocus >
+      <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save">
+  </form>
+  <br>
+  <a th:href="@{/categories}">Back to List</a>
+</div>
+<th:block th:replace="~{layoutad::footer}"></th:block>
+<script th:src="@{/js/dashboard.js}"></script>
+<script th:src="@{/js/simplebar.js}"></script>
+<script th:src="@{/js/apexcharts.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/sidebarmenu.js}"></script>
+<script th:src="@{/js/jquery-min.js}"></script>
+</body>
+</html>

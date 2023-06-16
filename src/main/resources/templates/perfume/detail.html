@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap"
+            rel="stylesheet"
+    />
+
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/all.min.css}"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/fancybox.css}">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/detail.css}">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/animate.min.css}">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/nice-select.min.css}">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link th:fragment="custom-css" rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<th:block th:replace="~{layout::header}"></th:block>
+<div class="product_area product_area_two mb-65">
+<div class="Product">
+    <div class="Product__detail">
+        <div class="Product__image">
+            <img src="${perfume.getImg()}" alt="" />
+        </div>
+        <div class="Product__title">
+            <h1><td th:text="${perfume.getTitle()}"></td></h1>
+            <ul>
+                <li>Giá: <td th:text="${perfume.getPrice()}"></td></li>
+                <li><td th:text="${perfume.getDes()}"></td></li>
+                <li>
+                    <button>S</button>
+                    <button>L</button>
+                    <button>M</button>
+                </li>
+                <li>
+                    Loại:
+                    <td th:text="${perfume.getCategory().getName()}"></td>
+                </li>
+            </ul>
+            <div class="Product__order">
+                <form th:action="@{/perfumes/add-to-cart}" method="post" class="d-inline">
+                    <input type="hidden" name="id" th:value="${perfume.getId()}">
+                    <input type="hidden" name="name" th:value="${perfume.getTitle()}">
+                    <input type="hidden" name="price" th:value="${perfume.getPrice()}">
+                    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this book to cart?')"><i class="fa fa-shopping-cart"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+      Fancybox.bind("[data-fancybox]", {});
+    </script>
+
+<script th:src="@{/js/detail.js}"></script>
+<script th:src="@{/js/fancybox.umd.js}"></script>
+<th:block th:replace="~{layout::footer}"></th:block>
+</body>
+
+</html>

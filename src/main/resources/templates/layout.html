@@ -1,54 +1,124 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My App</title>
+  <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+  <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/animate.min.css}">
+  <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+  <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/nice-select.min.css}">
   <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <link th:fragment="custom-css" rel="stylesheet" th:href="@{/css/style.css}">
+
 </head>
 <body class="d-flex flex-column h-100">
-<header th:fragment="header">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">HUTECH</a>
-      <button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggle-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="/perfumes">List Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="/perfumes/add">Add Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="/cart">Cart</a></li>
-          <li sec:authorize="isAuthenticated()">
-            <form th:action="@{/logout}" method="post">
-              <button class="btn btn-outline-danger" type="submit">Logout</button>
-            </form>
-          </li>
-          <li sec:authorize="!isAuthenticated()">
-            <a class="btn btn-outline-primary" href="/login">
-              Login
-            </a>
-          </li>
-        </ul>
+  <header th:fragment="header">
+    <div class="main_header header_transparent header-mobile-m">
+      <div class="header_container sticky-header">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-lg-2">
+              <div class="logo">
+                <a href="index.html"><img src="logo.png" alt=""></a>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <!-- main-menu starts -->
+              <div class="main_menu menu_two menu_position">
+                <nav>
+                  <ul>
+                    <li>
+                      <a href="/perfumes" class="active">Home</a>
+                    </li>
+
+                    <li >
+                      <a href="#">Brands <i class="fa fa-angle-down"></i></a>
+                      <ul class="sub_menu">
+                        <li><a href="#">Versace</a></li>
+                        <li><a href="#">Hugo Boss</a></li>
+                        <li><a href="#">Jaguar</a></li>
+                        <li><a href="#">Armani</a></li>
+                        <li><a href="#">Paco Rabbane</a></li>
+                        <li><a href="#">Ralph Lauren</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+              <!-- main menu ends -->
+            </div>
+            <div class="col-lg-4">
+              <div class="header_top_right">
+                <div class="header_right_info">
+                  <ul>
+                    <li class="search_box">
+                      <a href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                      <div class="search_widget">
+                        <form th:action="@{/perfumes/search}"
+                              method="get">
+                          <input  type="text" placeholder="Search Your Perfume" aria-label="Search" name="keyword">
+                          <button  type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                      </div>
+                    </li>
+                    <li class="mini_cart_wrapper">
+                      <a href="/cart">
+                        <i class="fa fa-shopping-cart"></i>
+                      </a>
+
+                      <!-- mini cart ends -->
+                    </li>
+                  </ul>
+                </div>
+                <div class="header_account">
+                  <ul>
+                    <li class="top_links">
+                      <a href="#">
+                        <i class="fa fa-cog"></i>
+                      </a>
+                      <ul class="dropdown_links">
+                        <li sec:authorize="isAuthenticated()">
+                          <a href="/logout">
+                            Logout
+                          </a>
+                        </li>
+                        <li sec:authorize="!isAuthenticated()">
+                          <a href="/login">
+                            Login
+                          </a>
+                        </li>
+                        <li sec:authorize="hasAnyAuthority('ADMIN')">
+                            <a href="/perfumes/ad">Dash Board</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
-</header>
+  </header>
 <div class="container">
   <div th:fragment="content"></div>
 </div>
 <footer th:fragment="footer" class="footer mt-auto py-3 bg-light">
-  <div class="container text-center">Copyright &copy;
-    <span th:text="${#dates.year(#dates.createNow())}"></span>
-    <a href="https://www.hutech.edu.vn/">HUTECH Education</a>
-  </div>
   <script th:src="@{/js/bootstrap.min.js}"></script>
-  <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <script th:src="@{/js/popper.min.js}"></script>
+  <script th:src="@{/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/js/countdown.js}"></script>
+  <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
 </footer>
 </body>
 </html>

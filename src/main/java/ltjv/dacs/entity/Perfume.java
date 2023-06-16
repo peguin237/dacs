@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import ltjv.dacs.Validator.annotation.ValidCategoryId;
+import ltjv.dacs.Validator.annotation.ValidUserId;
 import org.hibernate.Hibernate;
 import jakarta.validation.constraints.NotBlank;
 
@@ -32,6 +33,18 @@ public class Perfume {
     @Size(min = 1,max = 500, message = "Des must be between 1 and 50 characters")
     @NotBlank(message = "Des must not be blank")
     private String des;
+
+    @Column(name = "img", length = 500)
+    @NotBlank(message = "Img must not be blank")
+    private String img;
+    @Transient
+    public String getImgPath(){
+        if(img == null || id ==null)
+            return null;
+        return "/imgs/" + id + "/" + img;
+    }
+
+
     @Column(name = "price")
     @Positive(message = "Price must be greater than 0")
     private Double price;
@@ -40,6 +53,12 @@ public class Perfume {
     @ValidCategoryId
     @ToString.Exclude
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ValidUserId
+    private User user;
+
 
     @OneToMany(mappedBy = "perfume", cascade = CascadeType.ALL)
     @ToString.Exclude

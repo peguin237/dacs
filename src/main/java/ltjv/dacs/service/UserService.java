@@ -1,6 +1,9 @@
 package ltjv.dacs.service;
 
+import lombok.RequiredArgsConstructor;
+import ltjv.dacs.Repository.IRoleRepository;
 import ltjv.dacs.Repository.IUserRepository;
+import ltjv.dacs.constants.Role;
 import ltjv.dacs.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,21 +21,18 @@ import java.util.Optional;
 @Service
 @Slf4j
 @Transactional
-public class UserService implements UserDetailsService {
+public class UserService  {
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private IRoleRepository roleRepository;
 
-    public void save(@NotNull User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+    public void save(User user) {
         userRepository.save(user);
+        Long userId = userRepository.getUserIdByUsername(user.getUsername());
+        Long roleId = roleRepository.getRoleIdByName("USER");
+        if (roleId != 0 && userId != 0) {
+            userRepository.addRoleToUser(userId, roleId);
+        }
     }
-
-    public Optional<User> findByUsername(String username) throws
-            UsernameNotFoundException {
-        return Optional.ofNullable(userRepository.findByUsername(username));
-    }
-    @Override
-    public UserDetails loadUserByUsername(String username) throws
-            UsernameNotFoundException {
-        return userRepository.findByUsername(username);
-    } }
+}
