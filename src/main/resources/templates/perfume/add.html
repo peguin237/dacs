@@ -24,11 +24,6 @@
       <span class="text-danger" th:if="${#fields.hasErrors('des')}" th:errors="*{des}"></span>
     </div>
     <div class="col-6 mb-3">
-      <label class="form-label" for="img">Img:</label>
-      <input class="form-control" type="file" th:field="*{img}" id="img" placeholder="Enter img">
-      <span class="text-danger" th:if="${#fields.hasErrors('img')}" th:errors="*{img}"></span>
-    </div>
-    <div class="col-6 mb-3">
       <label class="form-label" for="price">Price:</label>
       <span class="text-danger">*</span>
       <input class="form-control" required type="text" th:field="*{price}" id="price" placeholder="Enter price">

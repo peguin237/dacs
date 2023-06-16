@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Book List</title>
+  <th:block th:replace="~{layout::link-css}"></th:block>
+  <th:block th:replace="~{layout::custom-css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{layout::header}"></th:block>
+<section class="slider_section slider_section2 mb-66">
+  <div class="slider_area owl-carousel">
+    <div class="single_slider d-flex align-items-center" data-bgimg="https://www.shutterstock.com/image-illustration/pink-sweet-minimal-cute-colorful-260nw-2168551809.jpg">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-6 col-md-6 offset-md-6">
+            <div class="slider_content slider_content2 content_right">
+              <h1>Men's Collection</h1>
+              <h2>Wild Stone</h2>
+              <p>The rich aromatic notes of rosemary and nerolu combined with the sophistication of tonka beans and white beans and white woods to create the perfect accompaniment for the suited look.</p>
+              <a href="#" class="button">Shop Now <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="single_slider d-flex align-items-center" data-bgimg="https://www.shutterstock.com/image-illustration/pink-sweet-minimal-cute-colorful-260nw-2168551809.jpg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-7">
+            <div class="slider_content slider_content2 content_left">
+              <h1>Watch</h1>
+              <h2>Maison Micallef</h2>
+              <p>This perfume is a wonderful elixir that heightens both the scents of gourmet Bourbon vanilla and those refined of tuberose and jasmine. The delightful alliance reminds of tropical paradise.</p>
+              <a href="#" class="button">Shop Now <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="product_area product_area_two mb-65">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section_title">
+          <h2>Chanel</h2>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div class="row">
+
+          <div th:each="perfume : ${perfumes}">
+            <div th:switch="${perfume.getCategory().getName()}">
+              <div th:case="'Chanel'">
+                <div class="col-lg-3">
+                  <article class="single_product">
+                    <figure>
+                      <div class="product_thumb">
+                        <a href="#" class="primary_img">
+                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                        </a>
+                        <a href="#" class="secondary_img">
+                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                        </a>
+                        <div class="action_links">
+                          <ul>
+                            <li class="add_to_cart">
+                              <form th:action="@{/perfumes/add-to-cart}" method="post" class="d-inline">
+                                <input type="hidden" name="id" th:value="${perfume.getId()}">
+                                <input type="hidden" name="name" th:value="${perfume.getTitle()}">
+                                <input type="hidden" name="price" th:value="${perfume.getPrice()}">
+                                <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this book to cart?')"><i class="fa fa-shopping-cart"></i></button>
+                              </form>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <figcaption class="product_content">
+                        <h4 class="product_name">
+                          <a th:href="@{/perfumes/detail/{id}(id=${perfume.getId()})}"><td th:text="${perfume.getTitle()}"></td></a>
+                        </h4>
+                        <div class="price_box">
+                          <span class="current_price"><td th:text="${perfume.getPrice()}"></td></span>
+                        </div>
+                        <div class="product_rating">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </article>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="~{layout::footer}"></th:block>
+</body>
+</html>

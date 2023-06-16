@@ -38,12 +38,11 @@
                     <li >
                       <a href="#">Brands <i class="fa fa-angle-down"></i></a>
                       <ul class="sub_menu">
-                        <li><a href="#">Versace</a></li>
-                        <li><a href="#">Hugo Boss</a></li>
-                        <li><a href="#">Jaguar</a></li>
-                        <li><a href="#">Armani</a></li>
-                        <li><a href="#">Paco Rabbane</a></li>
-                        <li><a href="#">Ralph Lauren</a></li>
+                        <li><a href="/perfumes/dior">Dior</a></li>
+                        <li><a href="/perfumes/chanel">Chanel</a></li>
+                        <li><a href="/perfumes/gucci">Gucci</a></li>
+                        <li><a href="/perfumes/burberry">Burberry</a></li>
+                        <li><a href="/perfumes/lancome">Lancome</a></li>
                       </ul>
                     </li>
                     <li><a href="#">About Us</a></li>
@@ -112,6 +111,48 @@
   <div th:fragment="content"></div>
 </div>
 <footer th:fragment="footer" class="footer mt-auto py-3 bg-light">
+  <footer class="footer_widgets color_two">
+    <div class="footer_top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-7">
+            <div class="widgets_container contact_us">
+              <div class="footer_logo">
+                <a href="#"><img src="logo.png" alt="Logo"></a>
+              </div>
+              <div class="footer_desc">
+                <p>Get all types of perfume from us within 2 day delivery. We can even order the perfumes which are not in our database. To do that kindly send a E-mail to the company's mail id.</p>
+              </div>
+              <p>
+                <span>Address :</span> International Business Center, Vesu, Surat, Gujarat
+              </p>
+              <p><span>Email :</span> <a href="#">deo@gmail.com</a></p>
+              <p><span>Phone :</span> <a href="tel: +91 8888884444">+91 8888884444</a> </p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-5">
+            <div class="widgets_container widget_menu">
+              <h3>Information</h3>
+              <div class="footer_menu">
+                <ul>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Prices Drop</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="widgets_container widgets_p_product">
+              <h3>Featured Products</h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="widgets_container widgets_p_product">
+              <h3>Most Viewed Products</h3>
+            </div>
+        </div>
+      </div>
+    </div>
   <script th:src="@{/js/bootstrap.min.js}"></script>
   <script th:src="@{/js/jquery.min.js}"></script>
   <script th:src="@{/js/popper.min.js}"></script>

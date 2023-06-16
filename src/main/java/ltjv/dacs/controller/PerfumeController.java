@@ -28,7 +28,7 @@ public class PerfumeController {
     private final CategoryService categoryService;
     private final CartService cartService;
     @GetMapping
-    public String showAllBooks(
+    public String showAllPerfumes(
             @NotNull Model model,
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "20") Integer pageSize,
@@ -38,6 +38,68 @@ public class PerfumeController {
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("totalPages", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy).size() / pageSize);
         return "perfume/list";
+    }
+    @GetMapping("/gucci")
+    public String showGucci(
+            @NotNull Model model,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        model.addAttribute("perfumes", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy));
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("totalPages", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy).size() / pageSize);
+        return "perfume/gucci";
+    }
+    @GetMapping("/lancome")
+    public String showLancome(
+            @NotNull Model model,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        model.addAttribute("perfumes", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy));
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("totalPages", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy).size() / pageSize);
+        return "perfume/lancome";
+    }
+    @GetMapping("/burberry")
+    public String showBurberry(
+            @NotNull Model model,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        model.addAttribute("perfumes", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy));
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("totalPages", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy).size() / pageSize);
+        return "perfume/burberry";
+    }
+
+    @GetMapping("/dior")
+    public String showDior(
+            @NotNull Model model,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        model.addAttribute("perfumes", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy));
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("totalPages", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy).size() / pageSize);
+        return "perfume/dior";
+    }
+
+    @GetMapping("/chanel")
+    public String showChanel(
+            @NotNull Model model,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "20") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        model.addAttribute("perfumes", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy));
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("totalPages", perfumeService.getAllPerfumes(pageNo, pageSize, sortBy).size() / pageSize);
+        return "perfume/chanel";
     }
 
     @GetMapping("/ad")
@@ -61,14 +123,12 @@ public class PerfumeController {
     @PostMapping("/add")
     public String addPerfume(
             @Valid @ModelAttribute("perfume") Perfume perfume,
-            @NotNull BindingResult bindingResult, Model model, @RequestParam("img")MultipartFile multipartFile) {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            @NotNull BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             var errors = bindingResult.getAllErrors()
                     .stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .toArray(String[]::new);
-            perfume.setImg(fileName);
             model.addAttribute("errors", errors);
             model.addAttribute("categories", categoryService.getAllCategories());
             return "perfume/add";

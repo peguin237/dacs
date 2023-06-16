@@ -34,17 +34,6 @@ public class Perfume {
     @NotBlank(message = "Des must not be blank")
     private String des;
 
-    @Column(name = "img", length = 500)
-    @NotBlank(message = "Img must not be blank")
-    private String img;
-    @Transient
-    public String getImgPath(){
-        if(img == null || id ==null)
-            return null;
-        return "/imgs/" + id + "/" + img;
-    }
-
-
     @Column(name = "price")
     @Positive(message = "Price must be greater than 0")
     private Double price;

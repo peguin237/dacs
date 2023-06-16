@@ -50,31 +50,11 @@
     <div class="row">
       <div class="col-12">
         <div class="section_title">
-          <h2>New Products</h2>
-          <div class="product_tab_btn">
-            <ul class="nav" role="tablist">
-              <li>
-                <a href="#Men" class="active" data-toggle="tab" role="tab" aria-controls="Men" aria-selected="true">
-                  Men
-                </a>
-              </li>
-              <li>
-                <a href="#Women" data-toggle="tab" role="tab" aria-controls="Women" aria-selected="false">
-                  Women
-                </a>
-              </li>
-              <li>
-                <a href="#Unisex" data-toggle="tab" role="tab" aria-controls="Unisex" aria-selected="false">
-                  Unisex
-                </a>
-              </li>
-            </ul>
-          </div>
+          <h2>New Perfumes</h2>
         </div>
       </div>
     </div>
     <div class="tab-content">
-      <div class="tab-pane fade show active" id="Men" role="tabpanel">
         <div class="row">
           <div class="product_carousel product_column4 owl-carousel">
             <div th:each="perfume : ${perfumes}">
@@ -144,141 +124,348 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
-    <div class="tab-pane fade" id="Women" role="tabpanel">
-      <div class="row">
-        <div class="product_carousel product_column4 owl-carousel">
-          <div th:each="perfume,iterStat : ${perfumes}" th:class="${iterStat.odd}? 'odd'">
-            <div class="col-lg-3">
-              <article class="single_product">
-                <figure>
-                  <div class="product_thumb">
-                    <a href="#" class="primary_img">
-                      <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
-                    </a>
-                    <a href="#" class="secondary_img">
-                      <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
-                    </a>
-                    <div class="action_links">
-                      <ul>
-                        <li class="add_to_cart">
-                          <a href="#" title="Add to Cart">
-                            <i class="fa fa-shopping-cart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <figcaption class="product_content">
-                    <h4 class="product_name">
-                      <a href="#"><td th:text="${perfume.getTitle()}"></td></a>
-                    </h4>
-                    <div class="price_box">
-                      <span class="current_price"><td th:text="${perfume.getPrice()}"></td></span>
-                    </div>
-                    <div class="product_rating">
-                      <ul>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </figcaption>
-                </figure>
-              </article>
-            </div>
-          </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section_title">
+          <h2>Chanel</h2>
         </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="Unisex" role="tabpanel">
+    <div class="tab-content">
+        <div class="row">
+          <div class="product_carousel product_column4 owl-carousel">
+            <div th:each="perfume : ${perfumes}">
+              <div th:switch="${perfume.getCategory().getName()}">
+                <div th:case="'CHANEL'">
+                  <div class="col-lg-3">
+                    <article class="single_product">
+                      <figure>
+                        <div class="product_thumb">
+                          <a href="#" class="primary_img">
+                            <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                          </a>
+                          <a href="#" class="secondary_img">
+                            <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                          </a>
+                          <div class="action_links">
+                            <ul>
+                              <li class="add_to_cart">
+                                <form th:action="@{/perfumes/add-to-cart}" method="post" class="d-inline">
+                                  <input type="hidden" name="id" th:value="${perfume.getId()}">
+                                  <input type="hidden" name="name" th:value="${perfume.getTitle()}">
+                                  <input type="hidden" name="price" th:value="${perfume.getPrice()}">
+                                  <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this book to cart?')"><i class="fa fa-shopping-cart"></i></button>
+                                </form>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <figcaption class="product_content">
+                          <h4 class="product_name">
+                            <a th:href="@{/perfumes/detail/{id}(id=${perfume.getId()})}"><td th:text="${perfume.getTitle()}"></td></a>
+                          </h4>
+                          <div class="price_box">
+                            <span class="current_price"><td th:text="${perfume.getPrice()}"></td></span>
+                          </div>
+                          <div class="product_rating">
+                            <ul>
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </article>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section_title">
+          <h2>Gucci</h2>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
       <div class="row">
         <div class="product_carousel product_column4 owl-carousel">
-          <div th:each="perfume,iterStat : ${perfumes}" th:class="${iterStat.odd}? 'odd'">
-            <div class="col-lg-3">
-              <article class="single_product">
-                <figure>
-                  <div class="product_thumb">
-                    <a href="#" class="primary_img">
-                      <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
-                    </a>
-                    <a href="#" class="secondary_img">
-                      <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
-                    </a>
-                    <div class="action_links">
-                      <ul>
-                        <li class="add_to_cart">
-                          <a href="#" title="Add to Cart">
-                            <i class="fa fa-shopping-cart"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <figcaption class="product_content">
-                    <h4 class="product_name">
-                      <a href="#"><td th:text="${perfume.getTitle()}"></td></a>
-                    </h4>
-                    <div class="price_box">
-                      <span class="current_price"><td th:text="${perfume.getPrice()}"></td></span>
-                    </div>
-                    <div class="product_rating">
-                      <ul>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </figcaption>
-                </figure>
-              </article>
+          <div th:each="perfume : ${perfumes}">
+            <div th:switch="${perfume.getCategory().getName()}">
+              <div th:case="'CHANEL'">
+                <div class="col-lg-3">
+                  <article class="single_product">
+                    <figure>
+                      <div class="product_thumb">
+                        <a href="#" class="primary_img">
+                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                        </a>
+                        <a href="#" class="secondary_img">
+                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                        </a>
+                        <div class="action_links">
+                          <ul>
+                            <li class="add_to_cart">
+                              <form th:action="@{/perfumes/add-to-cart}" method="post" class="d-inline">
+                                <input type="hidden" name="id" th:value="${perfume.getId()}">
+                                <input type="hidden" name="name" th:value="${perfume.getTitle()}">
+                                <input type="hidden" name="price" th:value="${perfume.getPrice()}">
+                                <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this book to cart?')"><i class="fa fa-shopping-cart"></i></button>
+                              </form>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <figcaption class="product_content">
+                        <h4 class="product_name">
+                          <a th:href="@{/perfumes/detail/{id}(id=${perfume.getId()})}"><td th:text="${perfume.getTitle()}"></td></a>
+                        </h4>
+                        <div class="price_box">
+                          <span class="current_price"><td th:text="${perfume.getPrice()}"></td></span>
+                        </div>
+                        <div class="product_rating">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </article>
+                </div>
+
+              </div>
             </div>
           </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section_title">
+          <h2>Burberry</h2>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div class="row">
+        <div class="product_carousel product_column4 owl-carousel">
+          <div th:each="perfume : ${perfumes}">
+            <div th:switch="${perfume.getCategory().getName()}">
+              <div th:case="'CHANEL'">
+                <div class="col-lg-3">
+                  <article class="single_product">
+                    <figure>
+                      <div class="product_thumb">
+                        <a href="#" class="primary_img">
+                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                        </a>
+                        <a href="#" class="secondary_img">
+                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                        </a>
+                        <div class="action_links">
+                          <ul>
+                            <li class="add_to_cart">
+                              <form th:action="@{/perfumes/add-to-cart}" method="post" class="d-inline">
+                                <input type="hidden" name="id" th:value="${perfume.getId()}">
+                                <input type="hidden" name="name" th:value="${perfume.getTitle()}">
+                                <input type="hidden" name="price" th:value="${perfume.getPrice()}">
+                                <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this book to cart?')"><i class="fa fa-shopping-cart"></i></button>
+                              </form>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <figcaption class="product_content">
+                        <h4 class="product_name">
+                          <a th:href="@{/perfumes/detail/{id}(id=${perfume.getId()})}"><td th:text="${perfume.getTitle()}"></td></a>
+                        </h4>
+                        <div class="price_box">
+                          <span class="current_price"><td th:text="${perfume.getPrice()}"></td></span>
+                        </div>
+                        <div class="product_rating">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </article>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section_title">
+          <h2>Lancome</h2>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div class="row">
+        <div class="product_carousel product_column4 owl-carousel">
+          <div th:each="perfume : ${perfumes}">
+            <div th:switch="${perfume.getCategory().getName()}">
+              <div th:case="'CHANEL'">
+                <div class="col-lg-3">
+                  <article class="single_product">
+                    <figure>
+                      <div class="product_thumb">
+                        <a href="#" class="primary_img">
+                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                        </a>
+                        <a href="#" class="secondary_img">
+                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                        </a>
+                        <div class="action_links">
+                          <ul>
+                            <li class="add_to_cart">
+                              <form th:action="@{/perfumes/add-to-cart}" method="post" class="d-inline">
+                                <input type="hidden" name="id" th:value="${perfume.getId()}">
+                                <input type="hidden" name="name" th:value="${perfume.getTitle()}">
+                                <input type="hidden" name="price" th:value="${perfume.getPrice()}">
+                                <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this book to cart?')"><i class="fa fa-shopping-cart"></i></button>
+                              </form>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <figcaption class="product_content">
+                        <h4 class="product_name">
+                          <a th:href="@{/perfumes/detail/{id}(id=${perfume.getId()})}"><td th:text="${perfume.getTitle()}"></td></a>
+                        </h4>
+                        <div class="price_box">
+                          <span class="current_price"><td th:text="${perfume.getPrice()}"></td></span>
+                        </div>
+                        <div class="product_rating">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </article>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
