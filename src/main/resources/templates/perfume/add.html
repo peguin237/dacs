@@ -11,17 +11,21 @@
 <body>
 <th:block th:replace="~{layoutad::header}"></th:block>
 <div class="container">
-  <form th:action="@{/perfumes/add}" th:object="${perfume}" method="post">
+  <form th:action="@{/perfumes/add}" th:object="${perfume}" method="post" >
     <div class="col-6 mb-3">
       <label class="form-label" for="title">Title:</label><span
             class="text-danger">*</span>
-      <input class="form-control" required type="text" th:field="*{title}" id="title" placeholder="Enter title" autofocus >
+      <input class="form-control" required type="text" th:field="*{title}" id="title" placeholder="Enter title"  >
       <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
     </div>
     <div class="col-6 mb-3">
       <label class="form-label" for="des">Des:</label>
       <input class="form-control" type="text" th:field="*{des}" id="des" placeholder="Enter des">
       <span class="text-danger" th:if="${#fields.hasErrors('des')}" th:errors="*{des}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="image">Image:</label>
+      <input class="form-control" type="file" name="image" id="image" >
     </div>
     <div class="col-6 mb-3">
       <label class="form-label" for="price">Price:</label>

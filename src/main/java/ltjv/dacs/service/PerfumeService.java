@@ -36,12 +36,13 @@ public class PerfumeService {
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void updatePerfume(@NotNull Perfume perfume) {
-        Perfume existingBook = perfumeRepository.findById(perfume.getId()).orElse(null);
-        Objects.requireNonNull(existingBook).setTitle(perfume.getTitle());
-        existingBook.setDes(perfume.getDes());
-        existingBook.setPrice(perfume.getPrice());
-        existingBook.setCategory(perfume.getCategory());
-        perfumeRepository.save(existingBook);
+        Perfume existingPerfume = perfumeRepository.findById(perfume.getId()).orElse(null);
+        Objects.requireNonNull(existingPerfume).setTitle(perfume.getTitle());
+        existingPerfume.setDes(perfume.getDes());
+        existingPerfume.setPrice(perfume.getPrice());
+        existingPerfume.setImage(perfume.getImage());
+        existingPerfume.setCategory(perfume.getCategory());
+        perfumeRepository.save(existingPerfume);
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")

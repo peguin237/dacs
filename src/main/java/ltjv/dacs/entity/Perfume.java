@@ -33,20 +33,27 @@ public class Perfume {
     @Size(min = 1,max = 500, message = "Des must be between 1 and 50 characters")
     @NotBlank(message = "Des must not be blank")
     private String des;
-
     @Column(name = "price")
     @Positive(message = "Price must be greater than 0")
     private Double price;
+    @Lob
+    @Column(name = "product_image")
+    private String image;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ValidCategoryId
     @ToString.Exclude
     private Category category;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ValidUserId
     private User user;
+
+
+
 
 
     @OneToMany(mappedBy = "perfume", cascade = CascadeType.ALL)

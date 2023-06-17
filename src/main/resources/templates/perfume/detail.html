@@ -32,7 +32,7 @@
 <div class="Product">
     <div class="Product__detail">
         <div class="Product__image">
-            <img src="${perfume.getImg()}" alt="" />
+            <img   th:src="@{/images/} + ${perfume.getImage()}" >
         </div>
         <div class="Product__title">
             <h1><td th:text="${perfume.getTitle()}"></td></h1>

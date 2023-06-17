@@ -19,6 +19,8 @@ import jakarta.validation.Valid;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/perfumes")
 @RequiredArgsConstructor
@@ -123,7 +125,7 @@ public class PerfumeController {
     @PostMapping("/add")
     public String addPerfume(
             @Valid @ModelAttribute("perfume") Perfume perfume,
-            @NotNull BindingResult bindingResult, Model model) {
+            @NotNull BindingResult bindingResult, Model model)  {
         if (bindingResult.hasErrors()) {
             var errors = bindingResult.getAllErrors()
                     .stream()
@@ -134,7 +136,7 @@ public class PerfumeController {
             return "perfume/add";
         }
         perfumeService.addPerfume(perfume);
-        return "redirect:/perfumes";
+        return "redirect:/perfumes/ad";
     }
 
     @GetMapping("/detail/{id}")
@@ -170,13 +172,13 @@ public class PerfumeController {
     @PostMapping("/edit")
     public String editProduct(@ModelAttribute("perfume") Perfume perfume) {
         perfumeService.addPerfume(perfume);
-        return "redirect:/perfumes";
+        return "redirect:/perfumes/ad";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
         perfumeService.deletePerfumeById(id);
-        return "redirect:/perfumes";
+        return "redirect:/perfumes/ad";
     }
     @PostMapping("/add-to-cart")
     public String addToCart(HttpSession session,

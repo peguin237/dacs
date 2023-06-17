@@ -2,18 +2,22 @@ package ltjv.dacs.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.*;
+import ltjv.dacs.Validator.annotation.ValidCategoryId;
 import ltjv.dacs.Validator.annotation.ValidUsername;
 import ltjv.dacs.entity.Perfume;
 import ltjv.dacs.entity.Role;
+import org.hibernate.Hibernate;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "user")
 public class User {
     @Id
@@ -38,8 +42,8 @@ public class User {
     @Size(max = 50, message = "Your name must be less than 50 characters")
     @NotBlank(message = "Your name is required")
     private String name;
-    @Column(name = "provider", length = 50)
-    private String provider;
+
+
     @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -48,4 +52,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Perfume> products = new ArrayList<>();
+
+
 }

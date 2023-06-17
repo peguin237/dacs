@@ -19,6 +19,7 @@
       <th th:href="@{/perfumes(pageNo=${currentPage}, sortBy='title')}">Title</th>
       <th th:href="@{/perfumes(pageNo=${currentPage}, sortBy='des')}">Des</th>
       <th th:href="@{/perfumes(pageNo=${currentPage}, sortBy='price')}">Price</th>
+      <th th:href="@{/perfumes(pageNo=${currentPage}, sortBy='image')}">Image</th>
       <th th:href="@{/perfumes(pageNo=${currentPage}, sortBy='category')}">Category</th>
       <th>Action</th>
     </tr>
@@ -29,6 +30,9 @@
       <td th:text="${perfume.getTitle()}"></td>
       <td th:text="${perfume.getDes()}"></td>
       <td th:text="${perfume.getPrice()}"></td>
+      <td>
+        <img  width="50px" height="50px" th:src="@{/images/} + ${perfume.getImage()}" alt="Product Image">
+      </td>
       <td th:text="${perfume.getCategory().getName()}"></td>
       <td colspan="2">
         <a class="btn btn-primary" sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/perfumes/edit/{id}(id=${perfume.getId()})}">Edit</a>

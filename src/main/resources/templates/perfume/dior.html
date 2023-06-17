@@ -5,46 +5,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Book List</title>
+  <title>Dior</title>
   <th:block th:replace="~{layout::link-css}"></th:block>
   <th:block th:replace="~{layout::custom-css}"></th:block>
 </head>
 <body>
 <th:block th:replace="~{layout::header}"></th:block>
-<section class="slider_section slider_section2 mb-66">
-  <div class="slider_area owl-carousel">
-    <div class="single_slider d-flex align-items-center" data-bgimg="https://www.shutterstock.com/image-illustration/pink-sweet-minimal-cute-colorful-260nw-2168551809.jpg">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6 offset-lg-6 col-md-6 offset-md-6">
-            <div class="slider_content slider_content2 content_right">
-              <h1>Men's Collection</h1>
-              <h2>Wild Stone</h2>
-              <p>The rich aromatic notes of rosemary and nerolu combined with the sophistication of tonka beans and white beans and white woods to create the perfect accompaniment for the suited look.</p>
-              <a href="#" class="button">Shop Now <i class="fa fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
 
-    </div>
-    <div class="single_slider d-flex align-items-center" data-bgimg="https://www.shutterstock.com/image-illustration/pink-sweet-minimal-cute-colorful-260nw-2168551809.jpg">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-7">
-            <div class="slider_content slider_content2 content_left">
-              <h1>Watch</h1>
-              <h2>Maison Micallef</h2>
-              <p>This perfume is a wonderful elixir that heightens both the scents of gourmet Bourbon vanilla and those refined of tuberose and jasmine. The delightful alliance reminds of tropical paradise.</p>
-              <a href="#" class="button">Shop Now <i class="fa fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 <div class="product_area product_area_two mb-65">
   <div class="container">
     <div class="row">
@@ -57,18 +24,16 @@
     <div class="tab-content">
       <div class="row">
         <div class="product_carousel product_column4 owl-carousel">
-          <div th:each="perfume : ${perfumes}">
-            <div th:switch="${perfume.getCategory().getName()}">
-              <div th:case="'Dior'">
+          <div th:each="perfume : ${perfumes}" th:if="${perfume.category.name == 'Dior'}">
                 <div class="col-lg-3">
                   <article class="single_product">
                     <figure>
                       <div class="product_thumb">
                         <a href="#" class="primary_img">
-                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                          <img th:src="@{/images/} + ${perfume.getImage()}" alt="">
                         </a>
                         <a href="#" class="secondary_img">
-                          <img src="https://i.pinimg.com/originals/4c/9b/e9/4c9be91395fdb45c27751b7a163704bd.png" alt="">
+                          <img th:src="@{/images/} + ${perfume.getImage()}" alt="">
                         </a>
                         <div class="action_links">
                           <ul>
@@ -123,11 +88,7 @@
                     </figure>
                   </article>
                 </div>
-
               </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
